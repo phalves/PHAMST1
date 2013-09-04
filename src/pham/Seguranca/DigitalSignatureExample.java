@@ -16,6 +16,7 @@ package pham.Seguranca;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.util.Scanner;
 
 // este exemplo utililiza facilidades para a geracao e verificacao
 // de assinatura digital
@@ -23,12 +24,24 @@ public class DigitalSignatureExample {
 
 	public static void main(String[] args) throws Exception {
 
+		/* Usar na linha de comando */
 		// verifica args e recebe o texto plano
-		if (args.length != 1) {
+		/*if (args.length != 1) {
 			System.err.println("Usage: java DigitalSignatureExample text");
 			System.exit(1);
 		}
 		byte[] plainText = args[0].getBytes("UTF8");
+		*/
+		/* FIM - Usar na linha de comando */
+		
+		/* Usar no eclipse */
+		Scanner reader = new Scanner(System.in);  
+        String text;
+        System.out.println ("Insert a string");
+        text = reader.next();
+        reader.close();
+        byte[] plainText = text.getBytes("UTF8");
+        /* FIM - Usar no eclipse */
 
 		// gera o par de chaves RSA
 		System.out.println("\nStart generating RSA key");
