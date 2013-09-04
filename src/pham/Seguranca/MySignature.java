@@ -73,6 +73,33 @@ public class MySignature {
 		messageDigest.update(message);
 		byte[] originalDigest = messageDigest.digest();
 		
+		
+		/* Example of invalid digest
+		 
+		originalDigest[0]=1;
+		
+		*/
+		
+		// Show original digest
+		System.out.println("\nOriginal Digest: ");
+		StringBuffer msgBuffer = new StringBuffer();
+		for(int i = 0; i < originalDigest.length; i++) {
+			String hex = Integer.toHexString(0x0100 + (originalDigest[i] & 0x00FF)).substring(1);
+			msgBuffer.append((hex.length() < 2 ? "0" : "") + hex);
+		}
+
+		System.out.println(msgBuffer.toString());
+		
+		// Show generated digest
+		System.out.println("\nGenerated Digest: ");
+		msgBuffer= new StringBuffer();
+		for(int i = 0; i < newDigest.length; i++) {
+			String hex = Integer.toHexString(0x0100 + (newDigest[i] & 0x00FF)).substring(1);
+			msgBuffer.append((hex.length() < 2 ? "0" : "") + hex);
+		}
+
+		System.out.println(msgBuffer.toString() + "\n");
+		
 		for (int i = 0; i < newDigest.length; i++) {
 			if (newDigest[i] != originalDigest[i])
 				return false;
