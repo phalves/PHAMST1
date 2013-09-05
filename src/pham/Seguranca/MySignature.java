@@ -1,6 +1,7 @@
 package pham.Seguranca;
 
 import java.security.InvalidKeyException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -73,32 +74,16 @@ public class MySignature {
 		messageDigest.update(message);
 		byte[] originalDigest = messageDigest.digest();
 		
-		
 		/* Example of invalid digest
-		 
-		originalDigest[0]=1;
-		
-		*/
+		originalDigest[0]=1; */
 		
 		// Show original digest
 		System.out.println("\nOriginal Digest: ");
-		StringBuffer msgBuffer = new StringBuffer();
-		for(int i = 0; i < originalDigest.length; i++) {
-			String hex = Integer.toHexString(0x0100 + (originalDigest[i] & 0x00FF)).substring(1);
-			msgBuffer.append((hex.length() < 2 ? "0" : "") + hex);
-		}
-
-		System.out.println(msgBuffer.toString());
+		printHexa(originalDigest);
 		
 		// Show generated digest
 		System.out.println("\nGenerated Digest: ");
-		msgBuffer= new StringBuffer();
-		for(int i = 0; i < newDigest.length; i++) {
-			String hex = Integer.toHexString(0x0100 + (newDigest[i] & 0x00FF)).substring(1);
-			msgBuffer.append((hex.length() < 2 ? "0" : "") + hex);
-		}
-
-		System.out.println(msgBuffer.toString() + "\n");
+		printHexa(newDigest);
 		
 		for (int i = 0; i < newDigest.length; i++) {
 			if (newDigest[i] != originalDigest[i])
@@ -106,5 +91,18 @@ public class MySignature {
 		}
 		
 		return true;
+	}
+	
+	public void printHexa(byte[] signature){
+
+		// converte o signature para hexadecimal
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < signature.length; i++) {
+			String hex = Integer.toHexString(0x0100 + (signature[i] & 0x00FF))
+					.substring(1);
+			buf.append((hex.length() < 2 ? "0" : "") + hex);
+		}
+		// imprime o signature em hexadecimal
+		System.out.println(buf.toString());
 	}
 }
