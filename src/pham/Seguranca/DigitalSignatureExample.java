@@ -8,10 +8,10 @@ package pham.Seguranca;
  * executados, inclusive apresentando o digest e a assinatura no formato hexadecimal.
  * 
  * 
- * Grupo N:
+ * Grupo 2:
  * 
- * Gabriel Lima #0921598
- * Luiz Henrique T. Cobucci #0812344
+ * Anderson Moreira #
+ * Paulo Henrique C. Alves #0911325
  */
 
 import java.security.KeyPair;
