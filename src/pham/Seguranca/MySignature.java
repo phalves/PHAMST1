@@ -67,6 +67,19 @@ public class MySignature {
 		this.publicKey = publicKey;
 	}
 	
+	public void printHexa(byte[] signature){
+
+		// converte o signature para hexadecimal
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < signature.length; i++) {
+			String hex = Integer.toHexString(0x0100 + (signature[i] & 0x00FF))
+					.substring(1);
+			buf.append((hex.length() < 2 ? "0" : "") + hex);
+		}
+		// imprime o signature em hexadecimal
+		System.out.println(buf.toString());
+	}
+	
 	public boolean verify(byte[] signature) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 		cipher.init(Cipher.DECRYPT_MODE, publicKey);
 		byte[] newDigest = cipher.doFinal(signature);
@@ -93,16 +106,5 @@ public class MySignature {
 		return true;
 	}
 	
-	public void printHexa(byte[] signature){
-
-		// converte o signature para hexadecimal
-		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < signature.length; i++) {
-			String hex = Integer.toHexString(0x0100 + (signature[i] & 0x00FF))
-					.substring(1);
-			buf.append((hex.length() < 2 ? "0" : "") + hex);
-		}
-		// imprime o signature em hexadecimal
-		System.out.println(buf.toString());
-	}
+	
 }

@@ -16,6 +16,7 @@ package pham.Seguranca;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 // este exemplo utililiza facilidades para a geracao e verificacao
@@ -44,11 +45,7 @@ public class DigitalSignatureExample {
         /* FIM - Usar no eclipse */
 
 		// gera o par de chaves RSA
-		System.out.println("\nStart generating RSA key");
-		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		keyGen.initialize(1024);
-		KeyPair key = keyGen.generateKeyPair();
-		System.out.println("Finish generating RSA key");
+        KeyPair key = keyParGenerator("RSA");
 
 		// define um objeto signature para utilizar MD5 e RSA
 		// e assina o texto plano com a chave privada
@@ -69,4 +66,14 @@ public class DigitalSignatureExample {
 		} else
 			System.out.println("\nSignature failed");
 	}
+	
+	private static KeyPair keyParGenerator(String instance) throws Exception{
+		System.out.println("\nStart generating RSA key");
+		KeyPairGenerator keyGen = KeyPairGenerator.getInstance(instance);
+		keyGen.initialize(1024);
+		KeyPair key = keyGen.generateKeyPair();
+		System.out.println("Finish generating RSA key");
+		return key;
+	}
+
 }
